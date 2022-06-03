@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+
         textView = findViewById(R.id.textView)
         textView.text = myViewModel.number.toString()
         button1 = findViewById(R.id.button)
