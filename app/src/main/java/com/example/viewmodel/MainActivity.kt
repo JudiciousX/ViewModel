@@ -1,5 +1,5 @@
 package com.example.viewmodel
-
+//ViewModel 实现按钮加数 并使用ViewModel保存数据
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -7,29 +7,27 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 class MainActivity : AppCompatActivity() {
-    lateinit var viewModelWithLiveData: ViewModelWithLiveData
+    lateinit var myViewModel:MyViewModel
+    lateinit var textView: TextView
+    lateinit var button1:Button
+    lateinit var button2:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val textView = findViewById<TextView>(R.id.textView)
-        val button1 = findViewById<Button>(R.id.button)
-        val button2 = findViewById<Button>(R.id.button2)
-
-        viewModelWithLiveData = ViewModelProvider(this).get(ViewModelWithLiveData::class.java)
-        val count = viewModelWithLiveData.counter.value
-        viewModelWithLiveData.counter.observe(this, Observer { count ->
-            textView.text = count.toString()
-        })
-
+        myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        textView = findViewById(R.id.textView)
+        textView.text = myViewModel.number.toString()
+        button1 = findViewById(R.id.button)
+        button2 = findViewById(R.id.button2)
         button1.setOnClickListener {
-            viewModelWithLiveData.plusOne()
+            myViewModel.number++
+            textView.text = myViewModel.number.toString()
         }
 
         button2.setOnClickListener {
-            viewModelWithLiveData.clear()
+            myViewModel.number += 2
+            textView.text = myViewModel.number.toString()
         }
-
     }
-
 }
