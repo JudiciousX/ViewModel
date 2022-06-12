@@ -4,10 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 class MainActivity : AppCompatActivity() {
-    lateinit var myViewModel:MyViewModel
+    //lateinit
     lateinit var textView: TextView
     lateinit var button1:Button
     lateinit var button2:Button
@@ -15,7 +16,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        //myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        val myViewModel:MyViewModel by viewModels<MyViewModel>()
 
         textView = findViewById(R.id.textView)
         textView.text = myViewModel.number.toString()
